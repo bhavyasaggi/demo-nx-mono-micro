@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "cli": {
+    "packageManager": "yarn"
+  },
   "targetDefaults": {
     "build": {
       "cache": true,
@@ -54,7 +57,8 @@
     "@nx/react": {
       "application": {
         "babel": true
-      }
+      },
+      "library": {}
     },
     "@nx/next": {
       "application": {

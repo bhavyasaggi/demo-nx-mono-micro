@@ -1,18 +1,46 @@
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import './styles.css';
+import '@demo-nx-mono-micro/shared-ui/bootstrap.scss';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+import { AppProps } from 'next/app';
+import { Rubik } from 'next/font/google';
+
+import { Provider } from 'react-redux';
+
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';
+
+import NavHeader from '@demo-nx-mono-micro/shared-ui/NavHeader';
+
+import { store } from '../store';
+
+const rubik = Rubik({
+  subsets: ['latin'],
+  variable: '--font-rubik',
+});
+
+const theme = extendTheme({
+  initialColorMode: 'system',
+  useSystemColorMode: false,
+});
+
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>
-        <title>Welcome to app-auth!</title>
-      </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
+      <style jsx global>
+        {`
+          :root {
+            --font-rubik: ${rubik.style.fontFamily};
+          }
+        `}
+      </style>
+      <ChakraProvider theme={theme}>
+        <Provider store={store}>
+          <NavHeader />
+          <main className={`${rubik.className}`}>
+            <Component {...pageProps} />
+          </main>
+        </Provider>
+      </ChakraProvider>
     </>
   );
 }
 
-export default CustomApp;
+export default App;
