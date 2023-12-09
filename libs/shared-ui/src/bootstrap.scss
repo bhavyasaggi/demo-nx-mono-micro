@@ -1,0 +1,45 @@
+// Flags
+$enable-caret: true !default;
+$enable-rounded: false !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: false !default;
+$enable-reduced-motion: false !default;
+$enable-smooth-scroll: false !default;
+$enable-grid-classes: false !default;
+$enable-container-classes: false !default;
+$enable-cssgrid: false !default;
+$enable-button-pointers: true !default;
+$enable-rfs: true !default;
+$enable-validation-icons: false !default;
+$enable-negative-margins: false !default;
+$enable-deprecation-messages: true !default;
+$enable-important-utilities: false !default;
+
+$enable-dark-mode: false !default;
+$color-mode-type: data !default; // `data` or `media-query`
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+) !default;
+$container-max-widths: (
+  sm: 540px,
+) !default;
+
+// Configuration
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/maps';
+@import '~bootstrap/scss/mixins';
+
+// scss-docs-start import-stack
+// Layout
+@import '~bootstrap/scss/root';
+@import '~bootstrap/scss/reboot';
+
+// Utilities
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/utilities/api';
+// scss-docs-end import-stack
