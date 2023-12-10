@@ -7,6 +7,7 @@ import {
 } from '@chakra-ui/react';
 
 import cx from 'classnames';
+import Link from '../Link';
 
 import styles from './index.module.scss';
 
@@ -31,7 +32,7 @@ export function NavHeader(props: NavHeaderProps) {
       )}
     >
       <Heading fontSize="medium" className={cx('ms-0', 'me-auto')}>
-        NX-MONO-MINCRO
+        <Link href="/">NX-MONO-MINCRO</Link>
       </Heading>
       <label className={cx("ms-auto','me-0")}>
         Dark Mode:{' '}

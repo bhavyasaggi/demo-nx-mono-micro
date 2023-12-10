@@ -36,7 +36,7 @@ export const UserSlice = createSlice({
       });
     },
     resetUser: (state) => {
-      state = initialState;
+      Object.assign(state, initialState);
     },
   },
 });
