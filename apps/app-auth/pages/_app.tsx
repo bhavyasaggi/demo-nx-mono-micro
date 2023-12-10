@@ -9,7 +9,7 @@ import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 
 import NavHeader from '@demo-nx-mono-micro/shared-ui/NavHeader';
 
-import { store } from '../store';
+import { setupStore } from '../store';
 
 const rubik = Rubik({
   subsets: ['latin'],
@@ -20,6 +20,8 @@ const theme = extendTheme({
   initialColorMode: 'system',
   useSystemColorMode: false,
 });
+
+const store = setupStore();
 
 function App({ Component, pageProps }: AppProps) {
   return (

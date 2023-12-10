@@ -103,6 +103,7 @@ export default function Authenticator({
               <AtSignIcon />
             </InputLeftElement>
             <Input
+              data-test-id="auth-email"
               type="email"
               placeholder="Email"
               disabled={isSubmitting}
@@ -136,6 +137,7 @@ export default function Authenticator({
               <LockIcon />
             </InputLeftElement>
             <Input
+              data-test-id="auth-password"
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter password"
               {...register('password', {
@@ -162,6 +164,7 @@ export default function Authenticator({
       <CardFooter>
         <Box w="100%">
           <Button
+            data-test-id="auth-submit"
             isDisabled={isLoading}
             isLoading={isLoading}
             colorScheme="green"

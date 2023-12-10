@@ -10,11 +10,13 @@ interface LinkProps extends NextLinkProps {
 }
 
 export default function Link({
+  as,
   href,
   passHref,
   children,
   className,
   style,
+  ...restProps
 }: LinkProps) {
   return (
     <ChakraLink
@@ -23,6 +25,7 @@ export default function Link({
       passHref={passHref}
       className={className}
       style={style}
+      {...restProps}
     >
       {children}
     </ChakraLink>

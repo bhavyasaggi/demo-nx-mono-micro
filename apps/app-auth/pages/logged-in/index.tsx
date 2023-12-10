@@ -1,16 +1,15 @@
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Flex } from '@chakra-ui/react';
 
-import AuthSuccess from '@demo-nx-mono-micro/shared-ui/AuthSuccess';
+import Dashboard from '@demo-nx-mono-micro/shared-ui/Dashboard';
 
 import { RootState } from '../../store';
 import { actionResetUser } from '../../store/sliceUser';
 
 export default function PageLoggedIn() {
-  const router = useRouter();
   const { id, firstName, lastName, image, gender, email, token } = useSelector(
     (state: RootState) => state.user
   );
@@ -23,9 +22,9 @@ export default function PageLoggedIn() {
 
   useEffect(() => {
     if (!token) {
-      router.replace('/');
+      Router.replace('/sign-in');
     }
-  }, [router, token]);
+  }, [token]);
 
   if (!token) {
     return null;
@@ -33,7 +32,7 @@ export default function PageLoggedIn() {
 
   return (
     <Flex minHeight="100vh" alignItems="center" justifyContent="center">
-      <AuthSuccess
+      <Dashboard
         id={id}
         firstName={firstName}
         lastName={lastName}

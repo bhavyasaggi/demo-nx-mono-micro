@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,8 +11,6 @@ import { type RootState } from '../../store';
 import { actionSetUser, UserState } from '../../store/sliceUser';
 
 export default function PageSignIn() {
-  const router = useRouter();
-
   const userToken = useSelector((state: RootState) => state.user.token);
 
   const dispatch = useDispatch();
@@ -27,16 +25,21 @@ export default function PageSignIn() {
   );
 
   const onFailureCb = useCallback(() => {
-    router.push('/logged-out');
-  }, [router]);
+    Router.push('/logged-out');
+  }, []);
 
   if (userToken) {
-    router.replace('/logged-in');
+    Router.replace('/logged-in');
     return null;
   }
 
   return (
-    <Flex alignItems="center" justifyContent="center" minHeight="100vh">
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      minHeight="100vh"
+      data-testid="box-auth"
+    >
       <Authenticator onSuccess={onSuccessCb} onFailure={onFailureCb} />
     </Flex>
   );

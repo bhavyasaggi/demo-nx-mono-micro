@@ -2,14 +2,12 @@ import {
   useColorMode,
   useColorModeValue,
   Heading,
-  Box,
+  Flex,
   Switch,
 } from '@chakra-ui/react';
 
 import cx from 'classnames';
 import Link from '../Link';
-
-import styles from './index.module.scss';
 
 /* eslint-disable-next-line */
 export interface NavHeaderProps {}
@@ -20,17 +18,7 @@ export function NavHeader(props: NavHeaderProps) {
 
   const isDarkMode = colorMode === 'dark';
   return (
-    <Box
-      as="nav"
-      bg={bg}
-      p="2"
-      className={cx(
-        'd-flex',
-        'align-items-center',
-        'justify-content-center',
-        styles['container']
-      )}
-    >
+    <Flex as="nav" alignItems="center" justifyContent="center" bg={bg} p="2">
       <Heading fontSize="medium" className={cx('ms-0', 'me-auto')}>
         <Link href="/">NX-MONO-MINCRO</Link>
       </Heading>
@@ -38,7 +26,7 @@ export function NavHeader(props: NavHeaderProps) {
         Dark Mode:{' '}
         <Switch isChecked={isDarkMode} onChange={() => toggleColorMode()} />
       </label>
-    </Box>
+    </Flex>
   );
 }
 
