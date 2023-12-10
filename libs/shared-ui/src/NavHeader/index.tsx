@@ -2,14 +2,13 @@ import {
   useColorMode,
   useColorModeValue,
   Heading,
-  Box,
+  Flex,
   Switch,
+  FormControl,
+  FormLabel,
 } from '@chakra-ui/react';
 
-import cx from 'classnames';
 import Link from '../Link';
-
-import styles from './index.module.scss';
 
 /* eslint-disable-next-line */
 export interface NavHeaderProps {}
@@ -20,25 +19,24 @@ export function NavHeader(props: NavHeaderProps) {
 
   const isDarkMode = colorMode === 'dark';
   return (
-    <Box
-      as="nav"
-      bg={bg}
-      p="2"
-      className={cx(
-        'd-flex',
-        'align-items-center',
-        'justify-content-center',
-        styles['container']
-      )}
-    >
-      <Heading fontSize="medium" className={cx('ms-0', 'me-auto')}>
-        <Link href="/">NX-MONO-MINCRO</Link>
+    <Flex as="nav" alignItems="center" bg={bg} p="2" w="100%">
+      <Heading fontSize="medium" flexGrow={1} flexShrink={0}>
+        <Link href="/">NX-MONO-MICRO</Link>
       </Heading>
-      <label className={cx("ms-auto','me-0")}>
-        Dark Mode:{' '}
-        <Switch isChecked={isDarkMode} onChange={() => toggleColorMode()} />
-      </label>
-    </Box>
+      <FormControl
+        as={Flex}
+        alignItems="center"
+        justifyContent="end"
+        marginStart="auto"
+      >
+        <FormLabel htmlFor="switch-color-mode">Dark Mode: </FormLabel>
+        <Switch
+          id="switch-color-mode"
+          isChecked={isDarkMode}
+          onChange={() => toggleColorMode()}
+        />
+      </FormControl>
+    </Flex>
   );
 }
 

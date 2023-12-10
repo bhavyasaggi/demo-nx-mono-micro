@@ -9,7 +9,7 @@ import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 
 import NavHeader from '@demo-nx-mono-micro/shared-ui/NavHeader';
 
-import { store } from '../store';
+import { setupStore } from '../store';
 
 const rubik = Rubik({
   subsets: ['latin'],
@@ -21,7 +21,11 @@ const theme = extendTheme({
   useSystemColorMode: false,
 });
 
+const store = setupStore();
+
 function App({ Component, pageProps }: AppProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const AnyComponent = Component as any;
   return (
     <>
       <style jsx global>
@@ -35,8 +39,7 @@ function App({ Component, pageProps }: AppProps) {
         <Provider store={store}>
           <NavHeader />
           <main className={`${rubik.className}`}>
-            {/* @ts-expect-error Spread Syntax */}
-            <Component {...pageProps} />
+            <AnyComponent {...pageProps} />
           </main>
         </Provider>
       </ChakraProvider>

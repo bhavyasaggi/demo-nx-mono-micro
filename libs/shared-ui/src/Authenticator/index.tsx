@@ -11,6 +11,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Button,
+  IconButton,
   Text,
   Card,
   CardFooter,
@@ -65,7 +66,6 @@ export default function Authenticator({
           }),
         });
         const resData = await res.json();
-        console.log('>>', res.status);
         if (res.status >= 500) {
           throw new Error(resData.message || 'Something went wrong');
         } else if (res.status >= 400) {
@@ -73,7 +73,6 @@ export default function Authenticator({
         }
         onSuccess(resData);
       } catch (err) {
-        console.error('>>', err);
         setError((err as Error).message);
       } finally {
         setLoading(false);
@@ -103,14 +102,15 @@ export default function Authenticator({
               <AtSignIcon />
             </InputLeftElement>
             <Input
+              data-testid="auth-email"
               type="email"
               placeholder="Email"
               disabled={isSubmitting}
               {...register('email', {
                 required: 'Email is required',
                 minLength: {
-                  value: 4,
-                  message: 'Minimum Email length should be 4',
+                  value: 6,
+                  message: 'Minimum Email length should be 6',
                 },
               })}
             />
@@ -120,7 +120,9 @@ export default function Authenticator({
             <a href="https://dummyjson.com/users">dummyjson.com/users</a>
           </FormHelperText>
           {errors.email && errors.email.message ? (
-            <FormErrorMessage>{String(errors.email.message)}</FormErrorMessage>
+            <FormErrorMessage data-testid="auth-error-email">
+              {String(errors.email.message)}
+            </FormErrorMessage>
           ) : null}
         </FormControl>
         <FormControl
@@ -136,6 +138,7 @@ export default function Authenticator({
               <LockIcon />
             </InputLeftElement>
             <Input
+              data-testid="auth-password"
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter password"
               {...register('password', {
@@ -147,13 +150,16 @@ export default function Authenticator({
               })}
             />
             <InputRightElement width="4.5rem">
-              <Button size="sm" onClick={togglePassword}>
-                {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-              </Button>
+              <IconButton
+                aria-label={showPassword ? 'Show Password' : 'Hide Password'}
+                size="sm"
+                icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                onClick={togglePassword}
+              />
             </InputRightElement>
           </InputGroup>
           {errors.password && errors.password.message ? (
-            <FormErrorMessage>
+            <FormErrorMessage data-testid="auth-error-password">
               {String(errors.password.message)}
             </FormErrorMessage>
           ) : null}
@@ -162,6 +168,7 @@ export default function Authenticator({
       <CardFooter>
         <Box w="100%">
           <Button
+            data-testid="auth-submit"
             isDisabled={isLoading}
             isLoading={isLoading}
             colorScheme="green"
@@ -171,7 +178,13 @@ export default function Authenticator({
             Sign In
           </Button>
           {errMsg ? (
-            <Text fontSize={12} color="red" textAlign="center">
+            <Text
+              data-testid="auth-error"
+              title={String(errMsg)}
+              fontSize={12}
+              color="red"
+              textAlign="center"
+            >
               Invalid Credentials
             </Text>
           ) : null}
