@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import PageHome from '../pages/index';
+import PageSignIn from '../pages/sign-in';
 
-describe('PageHome', () => {
+describe('PageSignIn', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<PageHome />);
+    const { baseElement } = render(<PageSignIn />);
     expect(baseElement).toBeTruthy();
   });
 });

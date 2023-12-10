@@ -35,6 +35,7 @@ function App({ Component, pageProps }: AppProps) {
         <Provider store={store}>
           <NavHeader />
           <main className={`${rubik.className}`}>
+            {/* @ts-expect-error Spread Syntax */}
             <Component {...pageProps} />
           </main>
         </Provider>

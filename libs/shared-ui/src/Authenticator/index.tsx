@@ -1,9 +1,7 @@
 import React, { useState, useReducer, useCallback } from 'react';
 
 import {
-  Box,
-  VStack,
-  Divider,
+  Heading,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -13,6 +11,11 @@ import {
   InputLeftElement,
   InputRightElement,
   Button,
+  Text,
+  Card,
+  CardFooter,
+  CardBody,
+  Box,
 } from '@chakra-ui/react';
 import { AtSignIcon, LockIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
@@ -32,7 +35,7 @@ export default function Authenticator({
   onFailure,
 }: AuthenticatorProps) {
   const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState(false);
+  const [errMsg, setError] = useState('');
   const [showPassword, togglePassword] = useReducer((v) => !v, false);
 
   const {
@@ -43,49 +46,56 @@ export default function Authenticator({
 
   const onSubmitCb = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (formData: any) => {
+    async (formData: any) => {
       const { email, password } = formData || {};
       if (!email || !password) {
-        setError(true);
+        setError('Missing credentials');
+        return;
       }
+      setError('');
       setLoading(true);
-      fetch('https://dummyjson.com/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: String(email).split('@')[0],
-          password: String(password),
-          // expiresInMins: 60, // optional
-        }),
-      })
-        .then((res) => res.json())
-        .then((userData) => {
-          onSuccess(userData);
-        })
-        .catch(() => {
-          setError(true);
-        })
-        .finally(() => {
-          setLoading(false);
+      try {
+        const res = await fetch('https://dummyjson.com/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: String(email).split('@')[0],
+            password: String(password),
+            // expiresInMins: 60, // optional
+          }),
         });
+        const resData = await res.json();
+        console.log('>>', res.status);
+        if (res.status >= 500) {
+          throw new Error(resData.message || 'Something went wrong');
+        } else if (res.status >= 400) {
+          throw new Error(resData.message || 'Invalid Request');
+        }
+        onSuccess(resData);
+      } catch (err) {
+        console.error('>>', err);
+        setError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
     },
     [onSuccess]
   );
 
   return (
-    <Box
+    <Card
       as="form"
       minWidth={96}
-      border="1px"
-      rounded={4}
-      p="6"
       className={styles['container']}
       onSubmit={handleSubmit(onSubmitCb)}
     >
-      <VStack spacing={6}>
+      <CardBody>
+        <Heading color="gray">Sign In</Heading>
         <FormControl
           isDisabled={isLoading}
-          isInvalid={isError || Boolean(errors.email && errors.email.message)}
+          isInvalid={
+            Boolean(errMsg) || Boolean(errors.email && errors.email.message)
+          }
         >
           <FormLabel>Email Address</FormLabel>
           <InputGroup>
@@ -116,7 +126,8 @@ export default function Authenticator({
         <FormControl
           isDisabled={isLoading}
           isInvalid={
-            isError || Boolean(errors.password && errors.password.message)
+            Boolean(errMsg) ||
+            Boolean(errors.password && errors.password.message)
           }
         >
           <FormLabel>Password</FormLabel>
@@ -147,24 +158,25 @@ export default function Authenticator({
             </FormErrorMessage>
           ) : null}
         </FormControl>
+      </CardBody>
+      <CardFooter>
         <Box w="100%">
-          <Divider colorScheme="gray" />
-          <InputGroup>
-            <Button
-              isDisabled={isLoading}
-              isLoading={isLoading}
-              colorScheme="green"
-              w="100%"
-              type="submit"
-            >
-              Sign In
-            </Button>
-            {isError ? (
-              <FormErrorMessage>Invalid Credentials</FormErrorMessage>
-            ) : null}
-          </InputGroup>
+          <Button
+            isDisabled={isLoading}
+            isLoading={isLoading}
+            colorScheme="green"
+            w="100%"
+            type="submit"
+          >
+            Sign In
+          </Button>
+          {errMsg ? (
+            <Text fontSize={12} color="red" textAlign="center">
+              Invalid Credentials
+            </Text>
+          ) : null}
         </Box>
-      </VStack>
-    </Box>
+      </CardFooter>
+    </Card>
   );
 }
