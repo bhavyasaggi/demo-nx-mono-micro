@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageLoggedOut should render successfully 1`] = `
+<div>
+  <div
+    class="css-1lnrks8"
+  >
+    <div
+      class="chakra-card css-2dlz7"
+    >
+      <div
+        class="chakra-card__body css-0"
+      >
+        <h2
+          class="chakra-heading css-0"
+        >
+          Logged out successfully
+        </h2>
+        <hr
+          aria-orientation="horizontal"
+          class="chakra-divider css-1upb9tn"
+        />
+        <a
+          class="chakra-link css-0"
+          href="/sign-in"
+        >
+          Sign In
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

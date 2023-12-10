@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageLoggedIn Should render user-info 1`] = `
+<div>
+  <div
+    class="css-1lnrks8"
+  >
+    <div
+      class="chakra-card container css-2dlz7"
+    >
+      <div
+        class="chakra-card__header css-0"
+      >
+        <h2
+          class="chakra-heading css-0"
+        >
+          Welcome, 
+          Jeanne
+          !
+        </h2>
+      </div>
+      <div
+        class="chakra-card__body css-13a6xye"
+      >
+        <div
+          class="chakra-table__container css-zipzvv"
+        >
+          <table
+            class="chakra-table css-0"
+          >
+            <tbody
+              class="css-0"
+            >
+              <tr
+                class="css-0"
+              >
+                <td
+                  class="css-0"
+                >
+                  <em
+                    class="chakra-text css-0"
+                  >
+                    Name
+                  </em>
+                </td>
+                <td
+                  class="css-0"
+                >
+                  Jeanne Halvorson
+                </td>
+              </tr>
+              <tr
+                class="css-0"
+              >
+                <td
+                  class="css-0"
+                >
+                  <em
+                    class="chakra-text css-0"
+                  >
+                    Gender
+                  </em>
+                </td>
+                <td
+                  class="css-0"
+                >
+                  female
+                </td>
+              </tr>
+              <tr
+                class="css-0"
+              >
+                <td
+                  class="css-0"
+                >
+                  <em
+                    class="chakra-text css-0"
+                  >
+                    Email
+                  </em>
+                </td>
+                <td
+                  class="css-0"
+                >
+                  kminchelle@qq.com
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="css-gmuwbf"
+        >
+          <span
+            class="chakra-avatar css-1uanvk6"
+          >
+            <div
+              aria-label="Jeanne Halvorson"
+              class="chakra-avatar__initials css-0"
+              role="img"
+            >
+              JH
+            </div>
+          </span>
+        </div>
+      </div>
+      <div
+        class="chakra-card__footer css-k008qs"
+      >
+        <button
+          class="chakra-button css-uxt1e8"
+          type="button"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

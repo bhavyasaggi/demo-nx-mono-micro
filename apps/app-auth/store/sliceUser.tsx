@@ -30,8 +30,9 @@ export const UserSlice = createSlice({
       const initKeys = Object.keys(initialState);
       Object.keys(payload).map((pKey) => {
         if (initKeys.includes(pKey)) {
-          // @ts-expect-error Unknown Key
-          state[pKey] = payload[pKey];
+          Object.assign(state, {
+            [pKey]: payload[pKey],
+          });
         }
       });
     },

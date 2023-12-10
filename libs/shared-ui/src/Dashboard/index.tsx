@@ -19,7 +19,7 @@ import {
 import styles from './index.module.scss';
 
 /* eslint-disable-next-line */
-export interface AuthSuccessProps {
+export interface DashboardProps {
   id: number;
   firstName: string;
   lastName: string;
@@ -29,14 +29,14 @@ export interface AuthSuccessProps {
   onLogout?: () => void;
 }
 
-export function AuthSuccess({
+export default function Dashboard({
   firstName,
   lastName,
   image,
   email,
   gender,
   onLogout,
-}: AuthSuccessProps) {
+}: DashboardProps) {
   const name = `${firstName} ${lastName}`;
   return (
     <Card className={`${styles['container']}`}>
@@ -89,5 +89,3 @@ export function AuthSuccess({
     </Card>
   );
 }
-
-export default AuthSuccess;
