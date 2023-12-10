@@ -29,7 +29,7 @@ export interface DashboardProps {
   onLogout?: () => void;
 }
 
-export function Dashboard({
+export default function Dashboard({
   firstName,
   lastName,
   image,
@@ -89,5 +89,3 @@ export function Dashboard({
     </Card>
   );
 }
-
-export default Dashboard;
