@@ -4,9 +4,10 @@ import {
   Heading,
   Flex,
   Switch,
+  FormControl,
+  FormLabel,
 } from '@chakra-ui/react';
 
-import cx from 'classnames';
 import Link from '../Link';
 
 /* eslint-disable-next-line */
@@ -18,14 +19,23 @@ export function NavHeader(props: NavHeaderProps) {
 
   const isDarkMode = colorMode === 'dark';
   return (
-    <Flex as="nav" alignItems="center" justifyContent="center" bg={bg} p="2">
-      <Heading fontSize="medium" className={cx('ms-0', 'me-auto')}>
-        <Link href="/">NX-MONO-MINCRO</Link>
+    <Flex as="nav" alignItems="center" bg={bg} p="2" w="100%">
+      <Heading fontSize="medium" flexGrow={1} flexShrink={0}>
+        <Link href="/">NX-MONO-MICRO</Link>
       </Heading>
-      <label className={cx("ms-auto','me-0")}>
-        Dark Mode:{' '}
-        <Switch isChecked={isDarkMode} onChange={() => toggleColorMode()} />
-      </label>
+      <FormControl
+        as={Flex}
+        alignItems="center"
+        justifyContent="end"
+        marginStart="auto"
+      >
+        <FormLabel htmlFor="switch-color-mode">Dark Mode: </FormLabel>
+        <Switch
+          id="switch-color-mode"
+          isChecked={isDarkMode}
+          onChange={() => toggleColorMode()}
+        />
+      </FormControl>
     </Flex>
   );
 }

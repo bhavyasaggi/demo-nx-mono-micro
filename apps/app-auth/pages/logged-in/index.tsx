@@ -1,4 +1,6 @@
+import Head from 'next/head';
 import Router from 'next/router';
+
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -31,16 +33,21 @@ export default function PageLoggedIn() {
   }
 
   return (
-    <Flex minHeight="100vh" alignItems="center" justifyContent="center">
-      <Dashboard
-        id={id}
-        firstName={firstName}
-        lastName={lastName}
-        image={image}
-        gender={gender}
-        email={email}
-        onLogout={onLogoutCb}
-      />
-    </Flex>
+    <>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <Flex minHeight="100vh" alignItems="center" justifyContent="center">
+        <Dashboard
+          id={id}
+          firstName={firstName}
+          lastName={lastName}
+          image={image}
+          gender={gender}
+          email={email}
+          onLogout={onLogoutCb}
+        />
+      </Flex>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Router from 'next/router';
 
 import React, { useCallback } from 'react';
@@ -34,13 +35,18 @@ export default function PageSignIn() {
   }
 
   return (
-    <Flex
-      alignItems="center"
-      justifyContent="center"
-      minHeight="100vh"
-      data-testid="box-auth"
-    >
-      <Authenticator onSuccess={onSuccessCb} onFailure={onFailureCb} />
-    </Flex>
+    <>
+      <Head>
+        <title>Sign In</title>
+      </Head>
+      <Flex
+        alignItems="center"
+        justifyContent="center"
+        minHeight="100vh"
+        data-testid="box-auth"
+      >
+        <Authenticator onSuccess={onSuccessCb} onFailure={onFailureCb} />
+      </Flex>
+    </>
   );
 }

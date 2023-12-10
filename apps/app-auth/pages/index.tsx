@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Router from 'next/router';
 
 import React, { useEffect } from 'react';
@@ -20,16 +21,21 @@ export default function Home() {
   }, [userToken]);
 
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      minHeight="100vh"
-    >
-      <Heading>Welcome!</Heading>
-      <Link data-testid="link-sign-in" href="/sign-in">
-        Sign In Manually
-      </Link>
-    </Flex>
+    <>
+      <Head>
+        <title>Welcome Home</title>
+      </Head>
+      <Flex
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        minHeight="100vh"
+      >
+        <Heading>Welcome!</Heading>
+        <Link data-testid="link-sign-in" href="/sign-in">
+          Sign In Manually
+        </Link>
+      </Flex>
+    </>
   );
 }

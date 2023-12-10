@@ -11,6 +11,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Button,
+  IconButton,
   Text,
   Card,
   CardFooter,
@@ -149,9 +150,12 @@ export default function Authenticator({
               })}
             />
             <InputRightElement width="4.5rem">
-              <Button size="sm" onClick={togglePassword}>
-                {showPassword ? <ViewOffIcon /> : <ViewIcon />}
-              </Button>
+              <IconButton
+                aria-label={showPassword ? 'Show Password' : 'Hide Password'}
+                size="sm"
+                icon={showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                onClick={togglePassword}
+              />
             </InputRightElement>
           </InputGroup>
           {errors.password && errors.password.message ? (
